@@ -38,9 +38,9 @@ const groups = [
 ]
 
 const band = [
-  'https://picsum.photos/seed/go-runtime/900/560',
+  'https://picsum.photos/seed/keyboard/900/560',
+  'https://picsum.photos/seed/workspace/900/560',
   'https://picsum.photos/seed/go-concurrency/900/560',
-  'https://picsum.photos/seed/go-interface/900/560',
 ]
 </script>
 
@@ -56,7 +56,7 @@ const band = [
         preload="metadata"
         aria-hidden="true"
       >
-        <source src="https://assets.mixkit.co/videos/1968/1968-1080.mp4" type="video/mp4" />
+        <source src="https://assets.mixkit.co/videos/1967/1967-1080.mp4" type="video/mp4" />
       </video>
       <div class="ch-bg-shade" aria-hidden="true"></div>
 
