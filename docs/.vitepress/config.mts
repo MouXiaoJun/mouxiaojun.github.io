@@ -2,12 +2,13 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: '邓晖的博客',
-  description: 'Go 设计模式 23 讲 · 工程随笔',
+  title: '邓晖 · Golang 后端工程师',
+  description: '个人主页与技术博客：Go 设计模式 23 讲 · 高并发一致性 · 工程随笔',
 
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
+      { text: '关于我', link: '/about/' },
       { text: '设计模式', link: '/design-patterns/' },
       { text: '博客', link: '/blog/' },
     ],
