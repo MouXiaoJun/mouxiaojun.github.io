@@ -60,7 +60,7 @@ export default defineConfig({
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/MouXiaoJun' }],
     footer: {
-      message: 'Golang 后端工程师 · 高并发一致性 · 中台组件抽象 · AI 辅助研发',
+      message: 'Golang 后端工程师 · 成都',
     },
   },
 })

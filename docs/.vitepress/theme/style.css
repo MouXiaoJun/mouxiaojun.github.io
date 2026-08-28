@@ -34,6 +34,18 @@ html.dark {
   --vp-border-radius: 10px;
 }
 
+/* ===== 全局背景：克制的 Go 蓝氛围光（无外发光，低透明度） ===== */
+html,
+body {
+  background-color: var(--vp-c-bg);
+}
+.Layout {
+  background:
+    radial-gradient(1100px 560px at 14% -8%, rgba(64, 200, 232, 0.06), transparent 60%),
+    radial-gradient(800px 480px at 88% 4%, rgba(64, 200, 232, 0.04), transparent 55%),
+    var(--vp-c-bg);
+}
+
 /* ===== 排版 ===== */
 .vp-doc h1,
 .vp-doc h2,
@@ -43,16 +55,45 @@ html.dark {
 .vp-doc h1 {
   font-size: 2.05rem;
 }
+.vp-doc h2 {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 44px;
+}
 
 .vp-doc a {
   color: var(--vp-c-brand-1);
+  text-decoration: none;
 }
 .vp-doc a:hover {
   color: var(--vp-c-brand-2);
 }
 
-/* ===== 导航：单行、细边框 ===== */
+/* 表格：去掉每行都有的 hairline，分组留白 */
+.vp-doc table {
+  display: table;
+  width: 100%;
+}
+.vp-doc tr {
+  border-top: none;
+}
+.vp-doc tr + tr {
+  border-top: 1px solid var(--vp-c-divider);
+}
+.vp-doc th {
+  border-top: 1px solid var(--vp-c-border);
+}
+.vp-doc th,
+.vp-doc td {
+  border-right: none;
+  border-bottom: none;
+}
+
+/* ===== 导航：毛玻璃 + 细边框 ===== */
 .VPNav {
+  background: rgba(11, 14, 19, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--vp-c-divider);
 }
 .VPNavBarTitle .title {
@@ -68,9 +109,18 @@ html.dark {
 .vp-doc div[class*='language-'] {
   border-radius: var(--vp-border-radius);
   border: 1px solid var(--vp-c-border);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 /* ===== 侧边栏 ===== */
 .VPSidebar {
   border-right: 1px solid var(--vp-c-divider);
+}
+.VPSidebarItem.level-0 .items {
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+/* ===== 页脚 ===== */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-divider);
 }
