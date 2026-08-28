@@ -4,6 +4,7 @@ export default defineConfig({
   lang: 'zh-CN',
   title: '邓晖 · Golang 后端工程师',
   description: '个人主页与技术博客：Go 设计模式 23 讲 · 高并发一致性 · 工程随笔',
+  appearance: 'dark',
 
   themeConfig: {
     nav: [
