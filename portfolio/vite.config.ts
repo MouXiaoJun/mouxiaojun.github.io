@@ -1,12 +1,15 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { fileURLToPath } from 'node:url'
 import { resolve } from 'node:path'
 
+const root = fileURLToPath(new URL('.', import.meta.url))
+
 export default defineConfig({
-  root: resolve(__dirname),
+  root,
   plugins: [react()],
   build: {
-    outDir: resolve(__dirname, '../site-dist'),
+    outDir: resolve(root, '../site-dist'),
     emptyOutDir: true,
     sourcemap: false,
   },
