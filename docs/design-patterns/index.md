@@ -5,87 +5,57 @@ description: 不背 UML，从真实 Go 后端场景理解 23 个 GoF 模式、�
 
 # Go 设计模式 23 讲
 
-这不是一份“背 UML、背定义”的设计模式目录，而是尝试回答一个更实际的问题：
+<div class="content-intro">
+这不是一份背定义的目录。每篇都从 Go 后端真实问题出发，讲清楚模式解决什么、Go 里更自然的写法是什么，以及什么时候根本不该使用它。
+</div>
 
-> **这些模式到了 Go 里，哪些仍然有价值，哪些可以被接口、函数、组合、channel、`iter.Seq` 或标准库更简单地表达？**
+<div class="content-strip">
+  <span class="content-pill">接口</span>
+  <span class="content-pill">函数值</span>
+  <span class="content-pill">组合</span>
+  <span class="content-pill">并发</span>
+  <span class="content-pill">状态机</span>
+  <span class="content-pill">标准库</span>
+  <span class="content-pill">工程取舍</span>
+</div>
 
-每一篇都会尽量从真实后端场景出发，包含问题代码、Go 风格实现、测试、工程取舍，以及“不该使用”的情况。
+<div class="content-kicker">01 / 创建型模式</div>
+<div class="content-grid">
+  <a class="content-card" href="./单例模式"><span class="content-card-index">01 / CREATIONAL</span><span class="content-card-arrow">↗</span><h3>单例模式</h3><p>sync.Once、进程级资源初始化，以及什么时候应该改用依赖注入。</p></a>
+  <a class="content-card" href="./工厂模式"><span class="content-card-index">02 / CREATIONAL</span><span class="content-card-arrow">↗</span><h3>工厂模式</h3><p>把对象创建收口到 composition root，根据配置选择具体实现。</p></a>
+  <a class="content-card" href="./建造者模式"><span class="content-card-index">03 / CREATIONAL</span><span class="content-card-arrow">↗</span><h3>建造者模式</h3><p>复杂对象分阶段构造、统一校验，以及 Builder 与 Functional Options。</p></a>
+  <a class="content-card" href="./原型模式"><span class="content-card-index">04 / CREATIONAL</span><span class="content-card-arrow">↗</span><h3>原型模式</h3><p>深浅拷贝、不可变共享与昂贵模板对象复制。</p></a>
+  <a class="content-card" href="./抽象工厂模式"><span class="content-card-index">05 / CREATIONAL</span><span class="content-card-arrow">↗</span><h3>抽象工厂模式</h3><p>多云、多厂商场景里创建一组彼此匹配的实现。</p></a>
+</div>
 
-## 阅读建议
+<div class="content-kicker">02 / 结构型模式</div>
+<div class="content-grid">
+  <a class="content-card" href="./适配器模式"><span class="content-card-index">06 / STRUCTURAL</span><span class="content-card-arrow">↗</span><h3>适配器模式</h3><p>支付、短信、OSS 等第三方 SDK 的反腐层。</p></a>
+  <a class="content-card" href="./桥接模式"><span class="content-card-index">07 / STRUCTURAL</span><span class="content-card-arrow">↗</span><h3>桥接模式</h3><p>两个变化维度独立演进，避免组合爆炸。</p></a>
+  <a class="content-card" href="./组合模式"><span class="content-card-index">08 / STRUCTURAL</span><span class="content-card-arrow">↗</span><h3>组合模式</h3><p>用统一接口处理文件树、组织树和权限树。</p></a>
+  <a class="content-card" href="./装饰器模式"><span class="content-card-index">09 / STRUCTURAL</span><span class="content-card-arrow">↗</span><h3>装饰器模式</h3><p>http.Handler / RoundTripper 风格的能力叠加。</p></a>
+  <a class="content-card" href="./外观模式"><span class="content-card-index">10 / STRUCTURAL</span><span class="content-card-arrow">↗</span><h3>外观模式</h3><p>用高层用例入口收敛复杂子系统调用。</p></a>
+  <a class="content-card" href="./享元模式"><span class="content-card-index">11 / STRUCTURAL</span><span class="content-card-arrow">↗</span><h3>享元模式</h3><p>共享昂贵、不可变对象，以及缓存容量与生命周期。</p></a>
+  <a class="content-card" href="./代理模式"><span class="content-card-index">12 / STRUCTURAL</span><span class="content-card-arrow">↗</span><h3>代理模式</h3><p>缓存、远程、权限与延迟加载等访问控制。</p></a>
+</div>
 
-不建议按 23 个模式从头背到尾。更推荐按你遇到的问题找模式：
-
-| 你遇到的问题 | 可以先看 |
-|---|---|
-| 创建对象参数太多、约束很多 | [建造者模式](建造者模式) |
-| 多个第三方 SDK 需要统一接口 | [适配器模式](适配器模式) |
-| 一堆 `if/else` 在选择算法 | [策略模式](策略模式) |
-| 订单/任务状态切换越来越乱 | [状态模式](状态模式) |
-| HTTP / RPC 想叠加日志、Tracing、鉴权 | [装饰器模式](装饰器模式) |
-| 一个业务用例要协调多个子系统 | [外观模式](外观模式) |
-| 请求要进入队列、重试、审计 | [命令模式](命令模式) |
-| 模块之间开始互相 import | [中介者模式](中介者模式) / [观察者模式](观察者模式) |
-| 数据天然是一棵树 | [组合模式](组合模式) |
-| 要遍历分页 API / 懒序列 | [迭代器模式](迭代器模式) |
-
-## 创建型（5）
-
-关注“对象怎么被创建”。
-
-| 模式 | Go 工程里的核心问题 |
-|---|---|
-| [单例模式](单例模式) | `sync.Once` 怎么保证进程级资源只初始化一次；什么时候应该改用依赖注入 |
-| [工厂模式](工厂模式) | 根据配置选择具体实现，把第三方对象创建逻辑收口到 composition root |
-| [建造者模式](建造者模式) | 复杂对象如何分阶段构造和统一校验；Builder vs Functional Options |
-| [原型模式](原型模式) | 深浅拷贝、不可变共享、昂贵模板对象复制 |
-| [抽象工厂模式](抽象工厂模式) | 多云/多厂商场景里如何创建一整组彼此匹配的实现 |
-
-## 结构型（7）
-
-关注“对象和模块怎么组合”。
-
-| 模式 | Go 工程里的核心问题 |
-|---|---|
-| [适配器模式](适配器模式) | 支付、短信、OSS 等第三方 SDK 的反腐层 |
-| [桥接模式](桥接模式) | 两个变化维度如何避免组合爆炸 |
-| [组合模式](组合模式) | 用统一接口处理文件树、组织树、权限树等 part-whole 结构 |
-| [装饰器模式](装饰器模式) | `http.Handler` / `RoundTripper` 风格能力叠加 |
-| [外观模式](外观模式) | 用一个高层用例入口收敛复杂子系统调用 |
-| [享元模式](享元模式) | 共享昂贵、不可变对象；缓存的容量与生命周期问题 |
-| [代理模式](代理模式) | 缓存、远程、权限、延迟加载等访问控制 |
-
-## 行为型（11）
-
-关注“对象之间怎么协作、行为怎么变化”。
-
-| 模式 | Go 工程里的核心问题 |
-|---|---|
-| [职责链模式](职责链模式) | 审批/风控规则按顺序尝试，节点可终止链 |
-| [命令模式](命令模式) | 把调用变成可排队、重试、审计的数据 |
-| [解释器模式](解释器模式) | 用 AST 实现规则 DSL，并控制安全边界 |
-| [迭代器模式](迭代器模式) | Go 1.23+ `iter.Seq` 与分页 API 懒遍历 |
-| [中介者模式](中介者模式) | 减少模块网状依赖，同时避免 God Mediator |
-| [备忘录模式](备忘录模式) | 快照、Undo、配置回滚，以及深拷贝成本 |
-| [观察者模式](观察者模式) | 进程内事件订阅、取消订阅、同步/异步语义 |
-| [状态模式](状态模式) | 状态机规则组织，以及数据库并发 CAS |
-| [策略模式](策略模式) | 用函数类型或小接口替换算法分支 |
-| [模板方法模式](模板方法模式) | Go 没有继承时，用组合/Hook 固定流程骨架 |
-| [访问者模式](访问者模式) | AST 上增加新操作；Visitor 与 type switch 的取舍 |
+<div class="content-kicker">03 / 行为型模式</div>
+<div class="content-grid">
+  <a class="content-card" href="./职责链模式"><span class="content-card-index">13 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>职责链模式</h3><p>审批、风控规则按顺序执行，并允许节点终止链。</p></a>
+  <a class="content-card" href="./命令模式"><span class="content-card-index">14 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>命令模式</h3><p>把调用变成可排队、重试、审计和持久化的数据。</p></a>
+  <a class="content-card" href="./解释器模式"><span class="content-card-index">15 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>解释器模式</h3><p>用 AST 构造规则 DSL，同时控制执行安全边界。</p></a>
+  <a class="content-card" href="./迭代器模式"><span class="content-card-index">16 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>迭代器模式</h3><p>Go 1.23+ iter.Seq 与分页 API 的懒遍历。</p></a>
+  <a class="content-card" href="./中介者模式"><span class="content-card-index">17 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>中介者模式</h3><p>减少模块网状依赖，同时避免演变成 God Mediator。</p></a>
+  <a class="content-card" href="./备忘录模式"><span class="content-card-index">18 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>备忘录模式</h3><p>快照、Undo、配置回滚，以及深拷贝带来的成本。</p></a>
+  <a class="content-card" href="./观察者模式"><span class="content-card-index">19 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>观察者模式</h3><p>进程内事件订阅、取消订阅与同步/异步语义。</p></a>
+  <a class="content-card" href="./状态模式"><span class="content-card-index">20 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>状态模式</h3><p>状态机规则组织，以及数据库并发 CAS。</p></a>
+  <a class="content-card" href="./策略模式"><span class="content-card-index">21 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>策略模式</h3><p>用函数类型或小接口替换不断膨胀的算法分支。</p></a>
+  <a class="content-card" href="./模板方法模式"><span class="content-card-index">22 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>模板方法模式</h3><p>Go 没有继承时，用组合与 Hook 固定流程骨架。</p></a>
+  <a class="content-card" href="./访问者模式"><span class="content-card-index">23 / BEHAVIORAL</span><span class="content-card-arrow">↗</span><h3>访问者模式</h3><p>在 AST 上增加新操作，以及 Visitor 与 type switch 的取舍。</p></a>
+</div>
 
 ## 先学 Go，再学模式
 
-设计模式不是目标。Go 本身已经提供很多比传统 OO 模式更轻的表达：
+设计模式不是目标。真正值得掌握的是：**识别变化方向，并把变化隔离在正确边界。**
 
-```text
-interface        -> Strategy / Adapter / Proxy
-function value   -> Strategy / Template Hook
-composition      -> Decorator / Bridge
-range + iter.Seq -> Iterator
-channel          -> 某些 Observer 场景
-type switch      -> 某些 Visitor 场景
-sync.Once        -> Singleton 初始化
-```
-
-如果一个模式让代码比原来的 `if`、函数、接口更难读，那就先不要用。
-
-真正值得掌握的是：**识别变化方向，并把变化隔离在正确边界。**
+如果一个模式让代码比原来的函数、接口或组合更难读，那就先不要用。
