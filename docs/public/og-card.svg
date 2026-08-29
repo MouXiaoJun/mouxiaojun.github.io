@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="title" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#646973"/>
+      <stop offset="1" stop-color="#D7E2EA"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(920 80) rotate(130) scale(480 360)">
+      <stop stop-color="#40C8E8" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#40C8E8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0C0C0C"/>
+  <rect x="40" y="40" width="1120" height="550" rx="48" fill="#111318" stroke="#D7E2EA" stroke-opacity=".12"/>
+  <rect x="40" y="40" width="1120" height="550" rx="48" fill="url(#glow)"/>
+  <circle cx="104" cy="102" r="8" fill="#40C8E8"/>
+  <text x="132" y="111" fill="#66727D" font-family="monospace" font-size="20" letter-spacing="4">GO BACKEND · AI PLATFORM · OPEN SOURCE</text>
+  <text x="90" y="320" fill="url(#title)" font-family="Arial, sans-serif" font-size="132" font-weight="800">邓晖</text>
+  <text x="94" y="390" fill="#D7E2EA" font-family="Arial, sans-serif" font-size="38" font-weight="600">构建可靠系统与有用的开发者工具</text>
+  <text x="94" y="458" fill="#8997A3" font-family="Arial, sans-serif" font-size="25">分布式系统 · 架构治理 · API 正确性 · AI 工程</text>
+  <text x="94" y="540" fill="#40C8E8" font-family="monospace" font-size="20">mouxiaojun.github.io</text>
+</svg>
