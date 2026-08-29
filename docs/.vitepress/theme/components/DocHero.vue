@@ -14,11 +14,11 @@ const section = computed(() => {
 })
 
 const sectionCode = computed(() => {
-  if (route.path.startsWith('/projects/')) return 'PROJECT'
-  if (route.path.startsWith('/design-patterns/')) return 'PATTERN'
-  if (route.path.startsWith('/blog/')) return 'WRITING'
-  if (route.path.startsWith('/about/')) return 'PROFILE'
-  return 'NOTE'
+  if (route.path.startsWith('/projects/')) return '开源工程'
+  if (route.path.startsWith('/design-patterns/')) return '设计模式'
+  if (route.path.startsWith('/blog/')) return '工程写作'
+  if (route.path.startsWith('/about/')) return '关于我'
+  return '技术笔记'
 })
 
 const description = computed(() => {
@@ -48,7 +48,7 @@ const status = computed(() => typeof frontmatter.value.status === 'string' ? fro
     </div>
 
     <div class="doc-hero-kicker">
-      <span>{{ sectionCode }}</span>
+      <span>MOUXIAOJUN / {{ sectionCode }}</span>
       <span v-if="status" class="doc-hero-status">{{ status }}</span>
     </div>
 
