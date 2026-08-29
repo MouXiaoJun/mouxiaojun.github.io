@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { copyFile, readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -6,7 +7,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 const DIST = path.join(ROOT, 'site-dist')
 const CSS_SOURCE = path.join(ROOT, 'styles', 'content-wide.css')
-const CSS_TARGET = path.join(DIST, 'content-wide.css')
 
 const CONTENT_SECTIONS = new Set(['design-patterns', 'blog', 'projects', 'about'])
 const SIDEBAR_SECTIONS = new Set(['design-patterns', 'blog', 'projects'])
@@ -46,7 +46,24 @@ function removeIndexOutline(html) {
   return html.replace(/\n?<aside class="site-outline">[\s\S]*?<\/aside>\n?/, '\n')
 }
 
+function attachWideStylesheet(html, href) {
+  const withoutOldWideStyles = html.replace(
+    /\n?<link rel="stylesheet" href="\/content-wide(?:\.[a-f0-9]+)?\.css" \/>\n?/g,
+    '\n',
+  )
+
+  return withoutOldWideStyles.replace(
+    '<link rel="stylesheet" href="/content.css" />',
+    `<link rel="stylesheet" href="/content.css" />\n<link rel="stylesheet" href="${href}" />`,
+  )
+}
+
 async function main() {
+  const css = await readFile(CSS_SOURCE)
+  const cssHash = createHash('sha256').update(css).digest('hex').slice(0, 12)
+  const cssName = `content-wide.${cssHash}.css`
+  const cssHref = `/${cssName}`
+  const cssTarget = path.join(DIST, cssName)
   const files = await walk(DIST)
 
   for (const file of files) {
@@ -59,12 +76,7 @@ async function main() {
     const isIndex = relative === `${section}/index.html`
     let html = await readFile(file, 'utf8')
 
-    if (!html.includes('/content-wide.css')) {
-      html = html.replace(
-        '<link rel="stylesheet" href="/content.css" />',
-        '<link rel="stylesheet" href="/content.css" />\n<link rel="stylesheet" href="/content-wide.css" />',
-      )
-    }
+    html = attachWideStylesheet(html, cssHref)
 
     if (isIndex) html = removeIndexOutline(html)
 
@@ -76,8 +88,8 @@ async function main() {
     await writeFile(file, html, 'utf8')
   }
 
-  await copyFile(CSS_SOURCE, CSS_TARGET)
-  console.log('Applied wide content layout overrides.')
+  await copyFile(CSS_SOURCE, cssTarget)
+  console.log(`Applied wide content layout overrides: ${cssName}`)
 }
 
 main().catch((error) => {
