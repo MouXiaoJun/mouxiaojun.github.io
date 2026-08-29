@@ -28,21 +28,26 @@ function FadeIn({ children, delay = 0, duration = 0.7, x = 0, y = 30, className 
 function ContactButton() {
   return (
     <a
-      href="mailto:hello@jack.design"
+      href="/about/"
       className="contact-button inline-flex items-center gap-3 rounded-full px-8 py-3 text-xs font-medium uppercase tracking-[0.18em] text-white sm:px-10 sm:py-3.5 sm:text-sm md:px-12 md:py-4 md:text-base"
     >
-      Contact Me
+      联系我
       <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
     </a>
   )
 }
 
-function LiveProjectButton() {
+function ProjectButton({ href }: { href: string }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border-2 border-[#D7E2EA] px-8 py-3 text-sm font-medium uppercase tracking-[0.16em] text-[#D7E2EA] transition hover:bg-[#D7E2EA]/10 sm:px-10 sm:py-3.5 sm:text-base">
-      Live Project
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center gap-2 rounded-full border-2 border-[#D7E2EA] px-8 py-3 text-sm font-medium uppercase tracking-[0.16em] text-[#D7E2EA] transition hover:bg-[#D7E2EA]/10 sm:px-10 sm:py-3.5 sm:text-base"
+    >
+      查看仓库
       <ArrowUpRight className="h-4 w-4" />
-    </span>
+    </a>
   )
 }
 
@@ -87,33 +92,33 @@ function Magnet({ children, padding = 150, strength = 3 }: { children: ReactNode
   )
 }
 
-const marqueeImages = [
-  'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
-  'https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif',
-  'https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif',
-  'https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif',
-  'https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif',
-  'https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif',
-  'https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif',
-  'https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif',
-  'https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif',
-  'https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif',
-  'https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif',
-  'https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif',
-  'https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif',
-  'https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif',
-  'https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif',
-  'https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif',
-  'https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif',
-  'https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif',
-  'https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif',
-  'https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif',
-  'https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif',
+const marqueeItems = [
+  ['Go', '后端主力语言'],
+  ['Goroutine', '并发与生命周期'],
+  ['Context', '取消传播与超时预算'],
+  ['MySQL', '事务 · 索引 · 一致性'],
+  ['Redis', '缓存 · 协调 · 限流'],
+  ['MQTT', '实时消息与设备链路'],
+  ['OpenTelemetry', 'Tracing · Metrics'],
+  ['distsync', '分布式同步原语'],
+  ['Fencing Token', '分布式正确性'],
+  ['Leader Election', '协调与主节点选举'],
+  ['Rate Limiter', '流量治理'],
+  ['gomodulith', '模块化单体工具'],
+  ['Architecture', '边界 · 依赖 · 演进'],
+  ['specriot', 'Stateful API Fuzzing'],
+  ['OpenAPI', '契约驱动测试'],
+  ['LangGraph', 'Agent 编排'],
+  ['Dify', 'AI 应用平台'],
+  ['LiveKit', '实时语音链路'],
+  ['AI Agents', '从 Demo 到生产'],
+  ['Developer Tools', '把重复问题工具化'],
+  ['Open Source', '长期维护的工程作品'],
 ]
 
-function MarqueeRow({ images, direction }: { images: string[]; direction: 'left' | 'right' }) {
+function MarqueeRow({ items, direction }: { items: string[][]; direction: 'left' | 'right' }) {
   const row = useRef<HTMLDivElement>(null)
-  const repeated = [...images, ...images, ...images]
+  const repeated = [...items, ...items, ...items]
 
   useEffect(() => {
     const node = row.current
@@ -138,14 +143,18 @@ function MarqueeRow({ images, direction }: { images: string[]; direction: 'left'
 
   return (
     <div ref={row} className="flex w-max gap-3" style={{ willChange: 'transform' }}>
-      {repeated.map((src, index) => (
-        <img
-          key={`${src}-${index}`}
-          src={src}
-          loading="lazy"
-          alt="3D project preview"
-          className="h-[270px] w-[420px] shrink-0 rounded-2xl object-cover"
-        />
+      {repeated.map(([title, subtitle], index) => (
+        <article
+          key={`${title}-${index}`}
+          className="tech-tile flex h-[270px] w-[420px] shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-[#111318] p-7"
+        >
+          <div className="text-xs font-medium uppercase tracking-[0.18em] text-[#7E8B96]">Engineering / {String((index % items.length) + 1).padStart(2, '0')}</div>
+          <div>
+            <h3 className="text-[clamp(2rem,4vw,3.8rem)] font-black uppercase leading-none tracking-tight text-[#D7E2EA]">{title}</h3>
+            <p className="mt-4 text-base font-light tracking-wide text-[#8997A3]">{subtitle}</p>
+          </div>
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D7E2EA]/35 to-transparent" />
+        </article>
       ))}
     </div>
   )
@@ -155,8 +164,8 @@ function MarqueeSection() {
   return (
     <section className="overflow-hidden bg-[#0C0C0C] pb-10 pt-24 sm:pt-32 md:pt-40">
       <div className="flex flex-col gap-3">
-        <MarqueeRow images={marqueeImages.slice(0, 11)} direction="right" />
-        <MarqueeRow images={marqueeImages.slice(11)} direction="left" />
+        <MarqueeRow items={marqueeItems.slice(0, 11)} direction="right" />
+        <MarqueeRow items={marqueeItems.slice(11)} direction="left" />
       </div>
     </section>
   )
@@ -184,7 +193,7 @@ function AnimatedText({ text }: { text: string }) {
   return (
     <p
       ref={ref}
-      className="mx-auto max-w-[560px] text-center text-[clamp(1rem,2vw,1.35rem)] font-medium leading-relaxed text-[#D7E2EA]"
+      className="mx-auto max-w-[680px] text-center text-[clamp(1rem,2vw,1.35rem)] font-medium leading-relaxed text-[#D7E2EA]"
     >
       {chars.map((char, index) => {
         const start = index / chars.length
@@ -200,34 +209,36 @@ function HeroSection() {
     <section className="relative flex h-screen flex-col overflow-x-clip bg-[#0C0C0C]">
       <FadeIn delay={0} y={-20}>
         <nav className="flex justify-between px-6 pt-6 text-sm font-medium uppercase tracking-wider text-[#D7E2EA] sm:px-8 md:px-10 md:pt-8 md:text-lg lg:text-[1.4rem]">
-          <a className="transition-opacity duration-200 hover:opacity-70" href="#about">About</a>
-          <a className="transition-opacity duration-200 hover:opacity-70" href="#services">Price</a>
-          <a className="transition-opacity duration-200 hover:opacity-70" href="#projects">Projects</a>
-          <a className="transition-opacity duration-200 hover:opacity-70" href="mailto:hello@jack.design">Contact</a>
+          <a className="transition-opacity duration-200 hover:opacity-70" href="#about">关于</a>
+          <a className="transition-opacity duration-200 hover:opacity-70" href="#services">方向</a>
+          <a className="transition-opacity duration-200 hover:opacity-70" href="#projects">项目</a>
+          <a className="transition-opacity duration-200 hover:opacity-70" href="/blog/">文章</a>
         </nav>
       </FadeIn>
 
       <FadeIn delay={0.15} y={40} className="relative z-0 mt-6 overflow-hidden sm:mt-4 md:-mt-5">
-        <h1 className="hero-heading w-full whitespace-nowrap text-[14vw] font-black uppercase leading-none tracking-tight sm:text-[15vw] md:text-[16vw] lg:text-[17.5vw]">
-          Hi, i&apos;m jack
+        <h1 className="hero-heading w-full whitespace-nowrap text-[13vw] font-black uppercase leading-none tracking-tight sm:text-[14vw] md:text-[14.5vw] lg:text-[15vw]">
+          你好，我是邓晖
         </h1>
       </FadeIn>
 
-      <FadeIn delay={0.6} y={30} className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[280px] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[360px] sm:translate-y-0 md:w-[440px] lg:w-[520px]">
+      <FadeIn delay={0.6} y={30} className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[250px] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[330px] sm:translate-y-0 md:w-[410px] lg:w-[480px]">
         <Magnet>
-          <img
-            src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
-            alt="Jack 3D creator portrait"
-            className="pointer-events-auto block w-full select-none object-contain"
-            draggable={false}
-          />
+          <div className="pointer-events-auto overflow-hidden rounded-[36%] border border-white/15 bg-[#111318] shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
+            <img
+              src="https://github.com/MouXiaoJun.png"
+              alt="邓晖"
+              className="block aspect-square w-full select-none object-cover grayscale-[0.15]"
+              draggable={false}
+            />
+          </div>
         </Magnet>
       </FadeIn>
 
       <div className="relative z-20 mt-auto flex items-end justify-between px-6 pb-7 sm:px-8 sm:pb-8 md:px-10 md:pb-10">
         <FadeIn delay={0.35} y={20}>
-          <p className="max-w-[160px] text-[clamp(0.75rem,1.4vw,1.5rem)] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[260px]">
-            a 3d creator driven by crafting striking and unforgettable projects
+          <p className="max-w-[190px] text-[clamp(0.75rem,1.35vw,1.35rem)] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[250px] md:max-w-[320px]">
+            专注 Go 后端、AI 平台与开发者工具，把真实工程问题做成可靠、清晰、可复用的系统
           </p>
         </FadeIn>
         <FadeIn delay={0.5} y={20}>
@@ -239,47 +250,29 @@ function HeroSection() {
 }
 
 const decorations = [
-  {
-    src: 'https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png',
-    className: 'top-[4%] left-[1%] sm:left-[2%] md:left-[4%] w-[120px] sm:w-[160px] md:w-[210px]',
-    delay: 0.1,
-    x: -80,
-  },
-  {
-    src: 'https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png',
-    className: 'bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%] w-[100px] sm:w-[140px] md:w-[180px]',
-    delay: 0.25,
-    x: -80,
-  },
-  {
-    src: 'https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png',
-    className: 'top-[4%] right-[1%] sm:right-[2%] md:right-[4%] w-[120px] sm:w-[160px] md:w-[210px]',
-    delay: 0.15,
-    x: 80,
-  },
-  {
-    src: 'https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png',
-    className: 'bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] w-[130px] sm:w-[170px] md:w-[220px]',
-    delay: 0.3,
-    x: 80,
-  },
+  { label: 'GO', className: 'top-[6%] left-[2%] md:left-[5%] w-[110px] sm:w-[150px] md:w-[190px]', delay: 0.1, x: -80 },
+  { label: '{ }', className: 'bottom-[10%] left-[5%] md:left-[11%] w-[90px] sm:w-[130px] md:w-[160px]', delay: 0.25, x: -80 },
+  { label: 'AI', className: 'top-[6%] right-[2%] md:right-[5%] w-[110px] sm:w-[150px] md:w-[190px]', delay: 0.15, x: 80 },
+  { label: '</>', className: 'bottom-[10%] right-[5%] md:right-[11%] w-[110px] sm:w-[150px] md:w-[190px]', delay: 0.3, x: 80 },
 ]
 
 function AboutSection() {
-  const text = "With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!"
+  const text = '我主要做 Go 服务端与 AI 平台工程，关注分布式正确性、模块边界、可观测性和工程效率。相比堆功能，我更喜欢把复杂问题拆清楚，再沉淀成可以长期复用的基础能力与开源工具。'
 
   return (
     <section id="about" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0C0C0C] px-5 py-20 sm:px-8 md:px-10">
       {decorations.map((item) => (
-        <FadeIn key={item.src} delay={item.delay} x={item.x} y={0} duration={0.9} className={`pointer-events-none absolute ${item.className}`}>
-          <img src={item.src} alt="" aria-hidden="true" className="w-full object-contain" />
+        <FadeIn key={item.label} delay={item.delay} x={item.x} y={0} duration={0.9} className={`pointer-events-none absolute ${item.className}`}>
+          <div className="flex aspect-square w-full items-center justify-center rounded-[32%] border border-white/10 bg-gradient-to-br from-[#16191f] to-[#0e1014] text-[clamp(2rem,5vw,4.2rem)] font-black tracking-tight text-[#73808B] shadow-[0_24px_70px_rgba(0,0,0,0.32)]">
+            {item.label}
+          </div>
         </FadeIn>
       ))}
 
       <div className="relative z-10 flex w-full flex-col items-center">
         <FadeIn delay={0} y={40}>
           <h2 className="hero-heading text-center text-[clamp(3rem,12vw,160px)] font-black uppercase leading-none tracking-tight">
-            About me
+            关于我
           </h2>
         </FadeIn>
 
@@ -296,11 +289,11 @@ function AboutSection() {
 }
 
 const services = [
-  ['01', '3D Modeling', 'Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations.'],
-  ['02', 'Rendering', 'High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life.'],
-  ['03', 'Motion Design', 'Dynamic animations and motion graphics that add energy and storytelling to brands, products, and digital experiences.'],
-  ['04', 'Branding', 'Crafting cohesive visual identities -- from logos to full brand systems -- that communicate a clear and memorable presence.'],
-  ['05', 'Web Design', 'Designing clean, modern, and conversion-focused websites with attention to layout, typography, and user experience.'],
+  ['01', 'Go 后端工程', '从业务服务到基础组件，关注并发控制、Context、数据库、缓存、消息链路与长期可维护性。'],
+  ['02', '分布式系统', '围绕锁、租约、Fencing Token、限流、Leader Election 和一致性边界，做正确而不是“看起来能跑”的实现。'],
+  ['03', 'AI 平台', '把 LLM、Agent、语音链路、知识与第三方能力接入真实产品，解决状态、成本、可观测与失败恢复。'],
+  ['04', '开发者工具', '把工程里的重复问题抽象成工具：分布式同步、架构约束、API 正确性测试与研发自动化。'],
+  ['05', '工程写作', '持续整理 Go 设计模式、后端正确性、模块化单体、缓存一致性和 AI 工程实践，让经验可以被复用。'],
 ]
 
 function ServicesSection() {
@@ -308,7 +301,7 @@ function ServicesSection() {
     <section id="services" className="rounded-t-[40px] bg-white px-5 py-20 text-[#0C0C0C] sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32">
       <FadeIn>
         <h2 className="mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28">
-          Services
+          专注方向
         </h2>
       </FadeIn>
 
@@ -333,41 +326,55 @@ type Project = {
   number: string
   name: string
   category: string
-  images: [string, string, string]
+  href: string
+  highlights: [string, string, string]
 }
 
 const projects: Project[] = [
   {
     number: '01',
-    name: 'Nextlevel Studio',
-    category: 'Client',
-    images: [
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85',
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85',
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85',
+    name: 'distsync',
+    category: '开源 · 分布式系统',
+    href: 'https://github.com/MouXiaoJun/distsync',
+    highlights: [
+      'Mutex · RWMutex · Semaphore',
+      'RateLimiter · Leader Election',
+      'Lease · Fencing Token · Redis / Valkey',
     ],
   },
   {
     number: '02',
-    name: 'Aura Brand Identity',
-    category: 'Personal',
-    images: [
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85',
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85',
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85',
+    name: 'gomodulith',
+    category: '开源 · 架构工具',
+    href: 'https://github.com/MouXiaoJun/gomodulith',
+    highlights: [
+      'Module Discovery',
+      'Boundary Verification · Cycle Detection',
+      'Architecture Graph · AI-readable Contract',
     ],
   },
   {
     number: '03',
-    name: 'Solaris Digital',
-    category: 'Client',
-    images: [
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85',
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85',
-      'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85',
+    name: 'specriot',
+    category: '开源 · API 正确性',
+    href: 'https://github.com/MouXiaoJun/specriot',
+    highlights: [
+      'OpenAPI Dependency Graph',
+      'Stateful API Fuzzing',
+      'Shrinking · Deterministic Replay',
     ],
   },
 ]
+
+function ProjectVisual({ text, large = false }: { text: string; large?: boolean }) {
+  return (
+    <div className={`project-visual flex w-full flex-col justify-between rounded-[40px] border border-white/10 bg-[#111318] p-6 sm:rounded-[50px] md:rounded-[60px] ${large ? 'h-full min-h-[320px]' : ''}`}>
+      <span className="text-xs font-medium uppercase tracking-[0.18em] text-[#6F7B86]">Engineering Note</span>
+      <strong className="max-w-[18ch] text-[clamp(1.25rem,2.8vw,3rem)] font-black uppercase leading-[0.96] tracking-tight text-[#D7E2EA]">{text}</strong>
+      <span className="text-xs uppercase tracking-[0.16em] text-[#596570]">MouXiaoJun / Open Source</span>
+    </div>
+  )
+}
 
 function ProjectCard({ project, index, total }: { project: Project; index: number; total: number }) {
   const container = useRef<HTMLDivElement>(null)
@@ -381,19 +388,19 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
         className="sticky top-24 rounded-[40px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 text-[#D7E2EA] sm:rounded-[50px] sm:p-6 md:top-32 md:rounded-[60px] md:p-8"
         style={{ scale, top: `calc(6rem + ${index * 28}px)` }}
       >
-        <div className="grid items-end gap-5 pb-6 sm:grid-cols-[0.35fr_0.5fr_1fr_auto] sm:gap-6 md:pb-8">
+        <div className="grid items-end gap-5 pb-6 sm:grid-cols-[0.35fr_0.65fr_1fr_auto] sm:gap-6 md:pb-8">
           <div className="hero-heading text-[clamp(3rem,8vw,110px)] font-black leading-none">{project.number}</div>
           <div className="text-sm font-light uppercase tracking-[0.16em] opacity-60">{project.category}</div>
           <h3 className="text-[clamp(1.5rem,3vw,3.2rem)] font-medium uppercase leading-none tracking-tight">{project.name}</h3>
-          <div className="justify-self-start sm:justify-self-end"><LiveProjectButton /></div>
+          <div className="justify-self-start sm:justify-self-end"><ProjectButton href={project.href} /></div>
         </div>
 
         <div className="grid grid-cols-[0.4fr_0.6fr] gap-3 sm:gap-4">
           <div className="grid gap-3 sm:gap-4">
-            <img src={project.images[0]} alt={`${project.name} preview 1`} className="h-[clamp(130px,16vw,230px)] w-full rounded-[40px] object-cover sm:rounded-[50px] md:rounded-[60px]" />
-            <img src={project.images[1]} alt={`${project.name} preview 2`} className="h-[clamp(160px,22vw,340px)] w-full rounded-[40px] object-cover sm:rounded-[50px] md:rounded-[60px]" />
+            <div className="h-[clamp(130px,16vw,230px)]"><ProjectVisual text={project.highlights[0]} /></div>
+            <div className="h-[clamp(160px,22vw,340px)]"><ProjectVisual text={project.highlights[1]} /></div>
           </div>
-          <img src={project.images[2]} alt={`${project.name} preview 3`} className="h-full min-h-[320px] w-full rounded-[40px] object-cover sm:rounded-[50px] md:rounded-[60px]" />
+          <ProjectVisual text={project.highlights[2]} large />
         </div>
       </motion.article>
     </div>
@@ -405,7 +412,7 @@ function ProjectsSection() {
     <section id="projects" className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 py-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:py-32">
       <FadeIn>
         <h2 className="hero-heading mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28">
-          Project
+          开源项目
         </h2>
       </FadeIn>
 
@@ -414,6 +421,16 @@ function ProjectsSection() {
           <ProjectCard key={project.name} project={project} index={index} total={projects.length} />
         ))}
       </div>
+
+      <FadeIn y={20} className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 border-t border-white/10 pt-12 text-[#D7E2EA]">
+        <p className="max-w-xl text-base font-light leading-relaxed text-[#8997A3]">
+          代码之外，我也持续整理 Go 设计模式和工程文章，把踩过的坑、做过的取舍和重新想明白的问题写下来。
+        </p>
+        <div className="flex gap-3">
+          <a href="/design-patterns/" className="rounded-full border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.15em] transition hover:bg-white/10">设计模式</a>
+          <a href="/blog/" className="rounded-full border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.15em] transition hover:bg-white/10">工程文章</a>
+        </div>
+      </FadeIn>
     </section>
   )
 }
