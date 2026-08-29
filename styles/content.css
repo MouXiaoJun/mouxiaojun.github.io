@@ -1,5 +1,5 @@
-/* ============================================================
-   Content pages stylesheet — mirrors the React homepage look.
+﻿/* ============================================================
+   Content pages stylesheet 鈥?mirrors the React homepage look.
    Self-contained: fonts, tokens, nav, hero, article, footer.
    ============================================================ */
 
@@ -124,7 +124,7 @@ pre {
 }
 
 .site-nav-inner {
-  max-width: 1280px;
+  max-width: 1680px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -205,7 +205,7 @@ pre {
 
 /* ===== Layout ===== */
 .site-layout {
-  max-width: 1280px;
+  max-width: 1680px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -266,8 +266,6 @@ pre {
 /* ===== Main / hero ===== */
 .site-main {
   min-width: 0;
-  max-width: 920px;
-  justify-self: center;
   width: 100%;
 }
 
@@ -556,7 +554,7 @@ pre {
   border-top: 1px solid var(--site-line);
 }
 
-/* highlight.js theme — dark, cyan accents */
+/* highlight.js theme 鈥?dark, cyan accents */
 .hljs {
   color: #cbd5e1;
 }
@@ -808,7 +806,7 @@ pre {
 }
 
 .site-footer {
-  max-width: 1280px;
+  max-width: 1680px;
   margin: 0 auto;
   padding: 28px 32px 48px;
   border-top: 1px solid var(--site-line);
@@ -827,10 +825,6 @@ pre {
 @media (min-width: 960px) {
   .site-layout.has-outline {
     grid-template-columns: 260px minmax(0, 1fr);
-  }
-
-  .site-layout.has-outline .site-main {
-    max-width: 920px;
   }
 
   .site-sidebar {
