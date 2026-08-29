@@ -1,12 +1,12 @@
 <script setup>
 import DefaultTheme from 'vitepress/theme'
-import CustomHome from './components/CustomHome.vue'
+import DocHero from './components/DocHero.vue'
 </script>
 
 <template>
   <DefaultTheme.Layout>
-    <template #home-hero-before>
-      <CustomHome />
+    <template #doc-before>
+      <DocHero />
     </template>
   </DefaultTheme.Layout>
 </template>
