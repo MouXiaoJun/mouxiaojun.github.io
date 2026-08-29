@@ -1,15 +1,17 @@
 {
   "name": "mouxiaojun.github.io",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "description": "React portfolio homepage plus VitePress engineering notes.",
   "scripts": {
     "dev": "vite --config portfolio/vite.config.ts",
     "dev:docs": "vitepress dev docs",
+    "typecheck": "tsc -p portfolio/tsconfig.json --noEmit",
     "build:portfolio": "vite build --config portfolio/vite.config.ts",
     "build:docs": "vitepress build docs",
     "build": "npm run build:docs && npm run build:portfolio && node scripts/merge-build.mjs",
+    "check": "npm run typecheck && npm run build",
     "preview": "vite preview --config portfolio/vite.config.ts"
   },
   "dependencies": {
