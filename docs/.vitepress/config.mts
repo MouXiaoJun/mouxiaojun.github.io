@@ -58,6 +58,32 @@ export default defineConfig({
           ],
         },
       ],
+      '/blog/': [
+        {
+          text: 'Go / Backend',
+          collapsed: false,
+          items: [
+            { text: 'Context 与取消传播', link: '/blog/go-context-cancellation' },
+            { text: '缓存一致性', link: '/blog/cache-consistency' },
+            { text: '模块化单体', link: '/blog/modular-monolith' },
+          ],
+        },
+        {
+          text: 'Distributed Systems / Tooling',
+          collapsed: false,
+          items: [
+            { text: '分布式锁与 Fencing Token', link: '/blog/distributed-lock-fencing' },
+            { text: 'OpenAPI Stateful Fuzzing', link: '/blog/openapi-stateful-fuzzing' },
+          ],
+        },
+        {
+          text: 'AI Engineering',
+          collapsed: false,
+          items: [
+            { text: 'Agent 从 Demo 到生产', link: '/blog/ai-agent-production' },
+          ],
+        },
+      ],
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/MouXiaoJun' }],
     footer: {
