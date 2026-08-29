@@ -63,6 +63,42 @@ img {
   -webkit-user-drag: none;
 }
 
+/*
+ * Hero 的定位层不能依赖 transform 居中，因为 Framer Motion 会写入 inline transform。
+ * 使用独立的 translate 属性负责水平定位，Motion 只负责入场动画，二者不会互相覆盖。
+ */
+.app > section:first-child > div:nth-of-type(2) {
+  position: relative;
+  z-index: 20 !important;
+}
+
+.app > section:first-child > div:nth-of-type(3) {
+  left: 50% !important;
+  top: auto !important;
+  bottom: -1.5rem !important;
+  width: clamp(250px, 21vw, 390px) !important;
+  translate: -50% 0;
+  z-index: 8 !important;
+}
+
+/* 保证底部简介和按钮永远在头像前面。 */
+.app > section:first-child > div:last-child {
+  z-index: 30 !important;
+}
+
+@media (max-width: 767px) {
+  .app > section:first-child > div:nth-of-type(3) {
+    bottom: 8vh !important;
+    width: clamp(210px, 58vw, 290px) !important;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 768px) {
+  .app > section:first-child > div:nth-of-type(3) {
+    width: clamp(220px, 18vw, 320px) !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
