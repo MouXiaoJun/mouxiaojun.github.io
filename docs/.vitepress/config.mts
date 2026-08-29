@@ -2,16 +2,17 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: '邓晖 · Golang 后端工程师',
-  description: '个人主页与技术博客：Go 设计模式 23 讲 · 高并发一致性 · 工程随笔',
+  title: '邓晖 · Go Backend & AI Platform',
+  description: 'Go 后端、AI 平台与开源工程：分布式系统、架构工具、API 正确性与工程实践。',
   appearance: 'dark',
 
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
-      { text: '关于我', link: '/about/' },
+      { text: '项目', link: '/#projects' },
       { text: '设计模式', link: '/design-patterns/' },
       { text: '博客', link: '/blog/' },
+      { text: '关于我', link: '/about/' },
     ],
     sidebar: {
       '/design-patterns/': [
@@ -60,7 +61,7 @@ export default defineConfig({
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/MouXiaoJun' }],
     footer: {
-      message: 'Golang 后端工程师 · 成都',
+      message: 'Go Backend · AI Platform · Open Source',
     },
   },
 })
