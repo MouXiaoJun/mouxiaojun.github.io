@@ -29,7 +29,7 @@ function ContactButton() {
   return (
     <a
       href="/about/"
-      className="contact-button inline-flex items-center gap-3 rounded-full px-8 py-3 text-xs font-medium uppercase tracking-[0.18em] text-white sm:px-10 sm:py-3.5 sm:text-sm md:px-12 md:py-4 md:text-base"
+      className="contact-button inline-flex items-center gap-3 rounded-full px-8 py-3 text-xs font-medium tracking-[0.18em] text-white sm:px-10 sm:py-3.5 sm:text-sm md:px-12 md:py-4 md:text-base"
     >
       联系我
       <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
@@ -43,9 +43,9 @@ function ProjectButton({ href }: { href: string }) {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex items-center gap-2 rounded-full border-2 border-[#D7E2EA] px-8 py-3 text-sm font-medium uppercase tracking-[0.16em] text-[#D7E2EA] transition hover:bg-[#D7E2EA]/10 sm:px-10 sm:py-3.5 sm:text-base"
+      className="inline-flex items-center gap-2 rounded-full border-2 border-[#D7E2EA] px-6 py-2.5 text-xs font-medium tracking-[0.12em] text-[#D7E2EA] transition hover:bg-[#D7E2EA]/10 sm:px-8 sm:py-3 sm:text-sm"
     >
-      查看仓库
+      查看源码
       <ArrowUpRight className="h-4 w-4" />
     </a>
   )
@@ -99,21 +99,21 @@ const marqueeItems = [
   ['MySQL', '事务 · 索引 · 一致性'],
   ['Redis', '缓存 · 协调 · 限流'],
   ['MQTT', '实时消息与设备链路'],
-  ['OpenTelemetry', 'Tracing · Metrics'],
-  ['distsync', '分布式同步原语'],
-  ['Fencing Token', '分布式正确性'],
-  ['Leader Election', '协调与主节点选举'],
-  ['Rate Limiter', '流量治理'],
-  ['gomodulith', '模块化单体工具'],
-  ['Architecture', '边界 · 依赖 · 演进'],
-  ['specriot', 'Stateful API Fuzzing'],
+  ['可观测性', '链路追踪 · 指标 · 日志'],
+  ['分布式同步', '锁 · 租约 · 信号量'],
+  ['Fencing Token', '防止过期持有者写入'],
+  ['主节点选举', '协调与高可用'],
+  ['流量治理', '限流 · 熔断 · 退避'],
+  ['模块化单体', '边界 · 依赖 · 演进'],
+  ['架构验证', '把架构规则变成测试'],
+  ['API 模糊测试', '从单接口走向状态流'],
   ['OpenAPI', '契约驱动测试'],
-  ['LangGraph', 'Agent 编排'],
+  ['LangGraph', 'Agent 状态编排'],
   ['Dify', 'AI 应用平台'],
   ['LiveKit', '实时语音链路'],
-  ['AI Agents', '从 Demo 到生产'],
-  ['Developer Tools', '把重复问题工具化'],
-  ['Open Source', '长期维护的工程作品'],
+  ['AI Agent', '从 Demo 到生产'],
+  ['开发者工具', '把重复问题工具化'],
+  ['开源工程', '长期维护真实项目'],
 ]
 
 function MarqueeRow({ items, direction }: { items: string[][]; direction: 'left' | 'right' }) {
@@ -146,12 +146,14 @@ function MarqueeRow({ items, direction }: { items: string[][]; direction: 'left'
       {repeated.map(([title, subtitle], index) => (
         <article
           key={`${title}-${index}`}
-          className="tech-tile flex h-[270px] w-[420px] shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-[#111318] p-7"
+          className="tech-tile flex h-[200px] w-[310px] shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-[#111318] p-6 sm:h-[270px] sm:w-[420px] sm:p-7"
         >
-          <div className="text-xs font-medium uppercase tracking-[0.18em] text-[#7E8B96]">Engineering / {String((index % items.length) + 1).padStart(2, '0')}</div>
+          <div className="text-[10px] font-medium tracking-[0.18em] text-[#7E8B96] sm:text-xs">
+            工程能力 / {String((index % items.length) + 1).padStart(2, '0')}
+          </div>
           <div>
-            <h3 className="text-[clamp(2rem,4vw,3.8rem)] font-black uppercase leading-none tracking-tight text-[#D7E2EA]">{title}</h3>
-            <p className="mt-4 text-base font-light tracking-wide text-[#8997A3]">{subtitle}</p>
+            <h3 className="text-[clamp(1.8rem,4vw,3.8rem)] font-black leading-none tracking-tight text-[#D7E2EA]">{title}</h3>
+            <p className="mt-3 text-sm font-light tracking-wide text-[#8997A3] sm:mt-4 sm:text-base">{subtitle}</p>
           </div>
           <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D7E2EA]/35 to-transparent" />
         </article>
@@ -206,9 +208,9 @@ function AnimatedText({ text }: { text: string }) {
 
 function HeroSection() {
   return (
-    <section className="relative flex h-screen flex-col overflow-x-clip bg-[#0C0C0C]">
-      <FadeIn delay={0} y={-20}>
-        <nav className="flex justify-between px-6 pt-6 text-sm font-medium uppercase tracking-wider text-[#D7E2EA] sm:px-8 md:px-10 md:pt-8 md:text-lg lg:text-[1.4rem]">
+    <section className="relative flex h-screen min-h-[660px] flex-col overflow-x-clip bg-[#0C0C0C]">
+      <FadeIn delay={0} y={-20} className="relative z-40">
+        <nav className="flex justify-between px-6 pt-6 text-sm font-medium tracking-wider text-[#D7E2EA] sm:px-8 md:px-10 md:pt-8 md:text-lg lg:text-[1.35rem]">
           <a className="transition-opacity duration-200 hover:opacity-70" href="#about">关于</a>
           <a className="transition-opacity duration-200 hover:opacity-70" href="#services">方向</a>
           <a className="transition-opacity duration-200 hover:opacity-70" href="#projects">项目</a>
@@ -216,29 +218,31 @@ function HeroSection() {
         </nav>
       </FadeIn>
 
-      <FadeIn delay={0.15} y={40} className="relative z-0 mt-6 overflow-hidden sm:mt-4 md:-mt-5">
-        <h1 className="hero-heading w-full whitespace-nowrap text-[13vw] font-black uppercase leading-none tracking-tight sm:text-[14vw] md:text-[14.5vw] lg:text-[15vw]">
+      <FadeIn delay={0.15} y={40} className="relative z-20 mt-6 overflow-hidden sm:mt-4 md:-mt-5">
+        <h1 className="hero-heading w-full whitespace-nowrap px-2 text-[12.6vw] font-black leading-none tracking-[-0.055em] sm:text-[13.5vw] md:text-[14vw] lg:text-[14.5vw]">
           你好，我是邓晖
         </h1>
       </FadeIn>
 
-      <FadeIn delay={0.6} y={30} className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[250px] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[330px] sm:translate-y-0 md:w-[410px] lg:w-[480px]">
-        <Magnet>
-          <div className="pointer-events-auto overflow-hidden rounded-[36%] border border-white/15 bg-[#111318] shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
-            <img
-              src="https://github.com/MouXiaoJun.png"
-              alt="邓晖"
-              className="block aspect-square w-full select-none object-cover grayscale-[0.15]"
-              draggable={false}
-            />
-          </div>
-        </Magnet>
-      </FadeIn>
+      <div className="hero-portrait-shell pointer-events-none absolute bottom-0 left-1/2 z-10 w-[230px] sm:w-[300px] md:w-[350px] lg:w-[390px]">
+        <FadeIn delay={0.6} y={30} className="w-full">
+          <Magnet>
+            <div className="pointer-events-auto overflow-hidden rounded-[34%] border border-white/15 bg-[#111318] shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
+              <img
+                src="https://github.com/MouXiaoJun.png"
+                alt="邓晖"
+                className="block aspect-square w-full select-none object-cover grayscale-[0.15]"
+                draggable={false}
+              />
+            </div>
+          </Magnet>
+        </FadeIn>
+      </div>
 
-      <div className="relative z-20 mt-auto flex items-end justify-between px-6 pb-7 sm:px-8 sm:pb-8 md:px-10 md:pb-10">
+      <div className="relative z-30 mt-auto flex items-end justify-between gap-4 px-6 pb-7 sm:px-8 sm:pb-8 md:px-10 md:pb-10">
         <FadeIn delay={0.35} y={20}>
-          <p className="max-w-[190px] text-[clamp(0.75rem,1.35vw,1.35rem)] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[250px] md:max-w-[320px]">
-            专注 Go 后端、AI 平台与开发者工具，把真实工程问题做成可靠、清晰、可复用的系统
+          <p className="max-w-[190px] text-[clamp(0.75rem,1.3vw,1.3rem)] font-light leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[250px] md:max-w-[330px]">
+            专注 Go 后端、AI 平台与开发者工具，把真实工程问题做成可靠、清晰、可复用的系统。
           </p>
         </FadeIn>
         <FadeIn delay={0.5} y={20}>
@@ -271,7 +275,7 @@ function AboutSection() {
 
       <div className="relative z-10 flex w-full flex-col items-center">
         <FadeIn delay={0} y={40}>
-          <h2 className="hero-heading text-center text-[clamp(3rem,12vw,160px)] font-black uppercase leading-none tracking-tight">
+          <h2 className="hero-heading text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight">
             关于我
           </h2>
         </FadeIn>
@@ -290,7 +294,7 @@ function AboutSection() {
 
 const services = [
   ['01', 'Go 后端工程', '从业务服务到基础组件，关注并发控制、Context、数据库、缓存、消息链路与长期可维护性。'],
-  ['02', '分布式系统', '围绕锁、租约、Fencing Token、限流、Leader Election 和一致性边界，做正确而不是“看起来能跑”的实现。'],
+  ['02', '分布式系统', '围绕锁、租约、Fencing Token、限流、主节点选举和一致性边界，做正确而不是“看起来能跑”的实现。'],
   ['03', 'AI 平台', '把 LLM、Agent、语音链路、知识与第三方能力接入真实产品，解决状态、成本、可观测与失败恢复。'],
   ['04', '开发者工具', '把工程里的重复问题抽象成工具：分布式同步、架构约束、API 正确性测试与研发自动化。'],
   ['05', '工程写作', '持续整理 Go 设计模式、后端正确性、模块化单体、缓存一致性和 AI 工程实践，让经验可以被复用。'],
@@ -300,7 +304,7 @@ function ServicesSection() {
   return (
     <section id="services" className="rounded-t-[40px] bg-white px-5 py-20 text-[#0C0C0C] sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32">
       <FadeIn>
-        <h2 className="mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28">
+        <h2 className="mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight sm:mb-20 md:mb-28">
           专注方向
         </h2>
       </FadeIn>
@@ -308,10 +312,10 @@ function ServicesSection() {
       <div className="mx-auto max-w-5xl">
         {services.map(([number, name, description], index) => (
           <FadeIn key={name} delay={index * 0.1} y={30}>
-            <article className="grid grid-cols-[minmax(90px,0.65fr)_1.35fr] gap-6 border-t border-[rgba(12,12,12,0.15)] py-8 last:border-b sm:gap-10 sm:py-10 md:py-12">
+            <article className="grid grid-cols-[minmax(72px,0.5fr)_1.5fr] gap-5 border-t border-[rgba(12,12,12,0.15)] py-8 last:border-b sm:grid-cols-[minmax(90px,0.65fr)_1.35fr] sm:gap-10 sm:py-10 md:py-12">
               <div className="text-[clamp(3rem,10vw,140px)] font-black leading-none tracking-tight">{number}</div>
               <div className="flex flex-col justify-center">
-                <h3 className="text-[clamp(1rem,2.2vw,2.1rem)] font-medium uppercase tracking-tight">{name}</h3>
+                <h3 className="text-[clamp(1rem,2.2vw,2.1rem)] font-medium tracking-tight">{name}</h3>
                 <p className="mt-4 max-w-2xl text-[clamp(0.85rem,1.6vw,1.25rem)] font-light leading-relaxed opacity-60">{description}</p>
               </div>
             </article>
@@ -324,7 +328,8 @@ function ServicesSection() {
 
 type Project = {
   number: string
-  name: string
+  title: string
+  repo: string
   category: string
   href: string
   highlights: [string, string, string]
@@ -333,45 +338,48 @@ type Project = {
 const projects: Project[] = [
   {
     number: '01',
-    name: 'distsync',
-    category: '开源 · 分布式系统',
+    title: 'Go 分布式同步工具',
+    repo: 'distsync',
+    category: '分布式系统',
     href: 'https://github.com/MouXiaoJun/distsync',
     highlights: [
-      'Mutex · RWMutex · Semaphore',
-      'RateLimiter · Leader Election',
-      'Lease · Fencing Token · Redis / Valkey',
+      '分布式互斥锁 · 读写锁 · 信号量',
+      '限流器 · 主节点选举',
+      '租约 · Fencing Token · Redis / Valkey',
     ],
   },
   {
     number: '02',
-    name: 'gomodulith',
-    category: '开源 · 架构工具',
+    title: 'Go 模块化单体工具',
+    repo: 'gomodulith',
+    category: '架构工具',
     href: 'https://github.com/MouXiaoJun/gomodulith',
     highlights: [
-      'Module Discovery',
-      'Boundary Verification · Cycle Detection',
-      'Architecture Graph · AI-readable Contract',
+      '模块自动发现',
+      '边界校验 · 循环依赖检测',
+      '架构图 · AI 可读架构契约',
     ],
   },
   {
     number: '03',
-    name: 'specriot',
-    category: '开源 · API 正确性',
+    title: 'OpenAPI 有状态模糊测试',
+    repo: 'specriot',
+    category: 'API 正确性',
     href: 'https://github.com/MouXiaoJun/specriot',
     highlights: [
-      'OpenAPI Dependency Graph',
-      'Stateful API Fuzzing',
-      'Shrinking · Deterministic Replay',
+      'OpenAPI 接口依赖关系图',
+      '有状态 API 模糊测试',
+      '失败收缩 · 确定性重放',
     ],
   },
 ]
 
 function ProjectVisual({ text, large = false }: { text: string; large?: boolean }) {
   return (
-    <div className={`project-visual flex w-full flex-col justify-between rounded-[40px] border border-white/10 bg-[#111318] p-6 sm:rounded-[50px] md:rounded-[60px] ${large ? 'h-full min-h-[320px]' : ''}`}>
-      <span className="text-xs font-medium uppercase tracking-[0.18em] text-[#6F7B86]">Engineering Note</span>
-      <strong className="max-w-[18ch] text-[clamp(1.25rem,2.8vw,3rem)] font-black uppercase leading-[0.96] tracking-tight text-[#D7E2EA]">{text}</strong>
-      <span className="text-xs uppercase tracking-[0.16em] text-[#596570]">MouXiaoJun / Open Source</span>
+    <div className={`project-visual flex w-full flex-col justify-between rounded-[32px] border border-white/10 bg-[#111318] p-5 sm:rounded-[50px] sm:p-6 md:rounded-[60px] ${large ? 'h-full min-h-[300px]' : ''}`}>
+      <span className="text-[10px] font-medium tracking-[0.18em] text-[#6F7B86] sm:text-xs">工程能力</span>
+      <strong className="max-w-[19ch] text-[clamp(1.15rem,2.6vw,2.8rem)] font-black leading-[1.05] tracking-tight text-[#D7E2EA]">{text}</strong>
+      <span className="text-[10px] tracking-[0.14em] text-[#596570] sm:text-xs">MouXiaoJun / 开源项目</span>
     </div>
   )
 }
@@ -383,22 +391,25 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale])
 
   return (
-    <div ref={container} className="relative h-[85vh]">
+    <div ref={container} className="relative h-[82vh] min-h-[620px]">
       <motion.article
-        className="sticky top-24 rounded-[40px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 text-[#D7E2EA] sm:rounded-[50px] sm:p-6 md:top-32 md:rounded-[60px] md:p-8"
-        style={{ scale, top: `calc(6rem + ${index * 28}px)` }}
+        className="sticky rounded-[36px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 text-[#D7E2EA] sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
+        style={{ scale, top: `${96 + index * 28}px` }}
       >
-        <div className="grid items-end gap-5 pb-6 sm:grid-cols-[0.35fr_0.65fr_1fr_auto] sm:gap-6 md:pb-8">
+        <div className="grid items-end gap-4 pb-6 sm:grid-cols-[0.32fr_0.55fr_1.2fr_auto] sm:gap-6 md:pb-8">
           <div className="hero-heading text-[clamp(3rem,8vw,110px)] font-black leading-none">{project.number}</div>
-          <div className="text-sm font-light uppercase tracking-[0.16em] opacity-60">{project.category}</div>
-          <h3 className="text-[clamp(1.5rem,3vw,3.2rem)] font-medium uppercase leading-none tracking-tight">{project.name}</h3>
+          <div>
+            <div className="text-xs font-light tracking-[0.14em] opacity-60 sm:text-sm">{project.category}</div>
+            <div className="mt-1 font-mono text-xs text-[#74818D]">{project.repo}</div>
+          </div>
+          <h3 className="text-[clamp(1.45rem,2.8vw,3rem)] font-medium leading-[1.05] tracking-tight">{project.title}</h3>
           <div className="justify-self-start sm:justify-self-end"><ProjectButton href={project.href} /></div>
         </div>
 
         <div className="grid grid-cols-[0.4fr_0.6fr] gap-3 sm:gap-4">
           <div className="grid gap-3 sm:gap-4">
-            <div className="h-[clamp(130px,16vw,230px)]"><ProjectVisual text={project.highlights[0]} /></div>
-            <div className="h-[clamp(160px,22vw,340px)]"><ProjectVisual text={project.highlights[1]} /></div>
+            <div className="h-[clamp(130px,16vw,220px)]"><ProjectVisual text={project.highlights[0]} /></div>
+            <div className="h-[clamp(160px,22vw,320px)]"><ProjectVisual text={project.highlights[1]} /></div>
           </div>
           <ProjectVisual text={project.highlights[2]} large />
         </div>
@@ -411,14 +422,14 @@ function ProjectsSection() {
   return (
     <section id="projects" className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 py-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:py-32">
       <FadeIn>
-        <h2 className="hero-heading mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black uppercase leading-none tracking-tight sm:mb-20 md:mb-28">
+        <h2 className="hero-heading mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight sm:mb-20 md:mb-28">
           开源项目
         </h2>
       </FadeIn>
 
       <div className="mx-auto max-w-7xl pb-16">
         {projects.map((project, index) => (
-          <ProjectCard key={project.name} project={project} index={index} total={projects.length} />
+          <ProjectCard key={project.repo} project={project} index={index} total={projects.length} />
         ))}
       </div>
 
@@ -427,8 +438,8 @@ function ProjectsSection() {
           代码之外，我也持续整理 Go 设计模式和工程文章，把踩过的坑、做过的取舍和重新想明白的问题写下来。
         </p>
         <div className="flex gap-3">
-          <a href="/design-patterns/" className="rounded-full border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.15em] transition hover:bg-white/10">设计模式</a>
-          <a href="/blog/" className="rounded-full border border-white/20 px-6 py-3 text-sm uppercase tracking-[0.15em] transition hover:bg-white/10">工程文章</a>
+          <a href="/design-patterns/" className="rounded-full border border-white/20 px-6 py-3 text-sm tracking-[0.12em] transition hover:bg-white/10">设计模式</a>
+          <a href="/blog/" className="rounded-full border border-white/20 px-6 py-3 text-sm tracking-[0.12em] transition hover:bg-white/10">工程文章</a>
         </div>
       </FadeIn>
     </section>
