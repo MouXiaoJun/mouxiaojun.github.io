@@ -193,10 +193,7 @@ function AnimatedText({ text }: { text: string }) {
   const chars = [...text]
 
   return (
-    <p
-      ref={ref}
-      className="mx-auto max-w-[680px] text-center text-[clamp(1rem,2vw,1.35rem)] font-medium leading-relaxed text-[#D7E2EA]"
-    >
+    <p ref={ref} className="mx-auto max-w-[680px] text-center text-[clamp(1rem,2vw,1.35rem)] font-medium leading-relaxed text-[#D7E2EA]">
       {chars.map((char, index) => {
         const start = index / chars.length
         const end = Math.min(1, start + 0.14)
@@ -228,12 +225,7 @@ function HeroSection() {
         <FadeIn delay={0.6} y={30} className="w-full">
           <Magnet>
             <div className="pointer-events-auto overflow-hidden rounded-[34%] border border-white/15 bg-[#111318] shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
-              <img
-                src="https://github.com/MouXiaoJun.png"
-                alt="邓晖"
-                className="block aspect-square w-full select-none object-cover grayscale-[0.15]"
-                draggable={false}
-              />
+              <img src="https://github.com/MouXiaoJun.png" alt="邓晖" className="block aspect-square w-full select-none object-cover grayscale-[0.15]" draggable={false} />
             </div>
           </Magnet>
         </FadeIn>
@@ -245,9 +237,7 @@ function HeroSection() {
             专注 Go 后端、AI 平台与开发者工具，把真实工程问题做成可靠、清晰、可复用的系统。
           </p>
         </FadeIn>
-        <FadeIn delay={0.5} y={20}>
-          <ContactButton />
-        </FadeIn>
+        <FadeIn delay={0.5} y={20}><ContactButton /></FadeIn>
       </div>
     </section>
   )
@@ -275,18 +265,10 @@ function AboutSection() {
 
       <div className="relative z-10 flex w-full flex-col items-center">
         <FadeIn delay={0} y={40}>
-          <h2 className="hero-heading text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight">
-            关于我
-          </h2>
+          <h2 className="hero-heading text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight">关于我</h2>
         </FadeIn>
-
-        <div className="mt-10 sm:mt-14 md:mt-16">
-          <AnimatedText text={text} />
-        </div>
-
-        <FadeIn delay={0.2} y={24} className="mt-16 sm:mt-20 md:mt-24">
-          <ContactButton />
-        </FadeIn>
+        <div className="mt-10 sm:mt-14 md:mt-16"><AnimatedText text={text} /></div>
+        <FadeIn delay={0.2} y={24} className="mt-16 sm:mt-20 md:mt-24"><ContactButton /></FadeIn>
       </div>
     </section>
   )
@@ -303,16 +285,11 @@ const services = [
 function ServicesSection() {
   return (
     <section id="services" className="rounded-t-[40px] bg-white px-5 py-20 text-[#0C0C0C] sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32">
-      <FadeIn>
-        <h2 className="mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight sm:mb-20 md:mb-28">
-          专注方向
-        </h2>
-      </FadeIn>
-
+      <FadeIn><h2 className="mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight sm:mb-20 md:mb-28">专注方向</h2></FadeIn>
       <div className="mx-auto max-w-5xl">
         {services.map(([number, name, description], index) => (
           <FadeIn key={name} delay={index * 0.1} y={30}>
-            <article className="grid grid-cols-[minmax(72px,0.5fr)_1.5fr] gap-5 border-t border-[rgba(12,12,12,0.15)] py-8 last:border-b sm:grid-cols-[minmax(90px,0.65fr)_1.35fr] sm:gap-10 sm:py-10 md:py-12">
+            <article className="grid grid-cols-[minmax(90px,0.65fr)_1.35fr] gap-6 border-t border-[rgba(12,12,12,0.15)] py-8 last:border-b sm:gap-10 sm:py-10 md:py-12">
               <div className="text-[clamp(3rem,10vw,140px)] font-black leading-none tracking-tight">{number}</div>
               <div className="flex flex-col justify-center">
                 <h3 className="text-[clamp(1rem,2.2vw,2.1rem)] font-medium tracking-tight">{name}</h3>
@@ -338,48 +315,36 @@ type Project = {
 const projects: Project[] = [
   {
     number: '01',
-    title: 'Go 分布式同步工具',
+    title: '分布式同步工具箱',
     repo: 'distsync',
-    category: '分布式系统',
+    category: '开源 · 分布式系统',
     href: 'https://github.com/MouXiaoJun/distsync',
-    highlights: [
-      '分布式互斥锁 · 读写锁 · 信号量',
-      '限流器 · 主节点选举',
-      '租约 · Fencing Token · Redis / Valkey',
-    ],
+    highlights: ['互斥锁 · 读写锁 · 信号量', '限流器 · 主节点选举', '租约 · Fencing Token · Redis / Valkey'],
   },
   {
     number: '02',
-    title: 'Go 模块化单体工具',
+    title: '模块化单体架构工具',
     repo: 'gomodulith',
-    category: '架构工具',
+    category: '开源 · 架构治理',
     href: 'https://github.com/MouXiaoJun/gomodulith',
-    highlights: [
-      '模块自动发现',
-      '边界校验 · 循环依赖检测',
-      '架构图 · AI 可读架构契约',
-    ],
+    highlights: ['模块自动发现', '边界验证 · 循环依赖检测', '架构图 · AI 可读架构契约'],
   },
   {
     number: '03',
-    title: 'OpenAPI 有状态模糊测试',
+    title: '有状态 API 模糊测试',
     repo: 'specriot',
-    category: 'API 正确性',
+    category: '开源 · API 正确性',
     href: 'https://github.com/MouXiaoJun/specriot',
-    highlights: [
-      'OpenAPI 接口依赖关系图',
-      '有状态 API 模糊测试',
-      '失败收缩 · 确定性重放',
-    ],
+    highlights: ['OpenAPI 依赖关系图', '有状态 API Fuzzing', '失败缩减 · 确定性重放'],
   },
 ]
 
 function ProjectVisual({ text, large = false }: { text: string; large?: boolean }) {
   return (
-    <div className={`project-visual flex w-full flex-col justify-between rounded-[32px] border border-white/10 bg-[#111318] p-5 sm:rounded-[50px] sm:p-6 md:rounded-[60px] ${large ? 'h-full min-h-[300px]' : ''}`}>
-      <span className="text-[10px] font-medium tracking-[0.18em] text-[#6F7B86] sm:text-xs">工程能力</span>
-      <strong className="max-w-[19ch] text-[clamp(1.15rem,2.6vw,2.8rem)] font-black leading-[1.05] tracking-tight text-[#D7E2EA]">{text}</strong>
-      <span className="text-[10px] tracking-[0.14em] text-[#596570] sm:text-xs">MouXiaoJun / 开源项目</span>
+    <div className={`project-visual flex w-full flex-col justify-between rounded-[40px] border border-white/10 bg-[#111318] p-6 sm:rounded-[50px] md:rounded-[60px] ${large ? 'h-full min-h-[320px]' : 'h-full'}`}>
+      <span className="text-xs font-medium tracking-[0.18em] text-[#6F7B86]">工程能力</span>
+      <strong className="max-w-[18ch] text-[clamp(1.25rem,2.8vw,3rem)] font-black leading-[0.96] tracking-tight text-[#D7E2EA]">{text}</strong>
+      <span className="text-xs tracking-[0.16em] text-[#596570]">MouXiaoJun / 开源项目</span>
     </div>
   )
 }
@@ -389,27 +354,28 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
   const { scrollYProgress } = useScroll({ target: container, offset: ['start end', 'start start'] })
   const targetScale = 1 - (total - 1 - index) * 0.03
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale])
+  const isLast = index === total - 1
 
   return (
-    <div ref={container} className="relative h-[82vh] min-h-[620px]">
+    <div ref={container} className={`relative ${isLast ? 'h-[122vh]' : 'h-[94vh]'}`}>
       <motion.article
-        className="sticky rounded-[36px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 text-[#D7E2EA] sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
-        style={{ scale, top: `${96 + index * 28}px` }}
+        className="sticky rounded-[40px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 text-[#D7E2EA] sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
+        style={{ scale, top: `calc(5.5rem + ${index * 28}px)` }}
       >
-        <div className="grid items-end gap-4 pb-6 sm:grid-cols-[0.32fr_0.55fr_1.2fr_auto] sm:gap-6 md:pb-8">
+        <div className="grid items-end gap-5 pb-6 sm:grid-cols-[0.32fr_0.62fr_1.2fr_auto] sm:gap-6 md:pb-8">
           <div className="hero-heading text-[clamp(3rem,8vw,110px)] font-black leading-none">{project.number}</div>
           <div>
-            <div className="text-xs font-light tracking-[0.14em] opacity-60 sm:text-sm">{project.category}</div>
-            <div className="mt-1 font-mono text-xs text-[#74818D]">{project.repo}</div>
+            <div className="text-sm font-light tracking-[0.12em] opacity-60">{project.category}</div>
+            <div className="mt-2 font-mono text-xs tracking-[0.16em] text-[#66727D]">{project.repo}</div>
           </div>
-          <h3 className="text-[clamp(1.45rem,2.8vw,3rem)] font-medium leading-[1.05] tracking-tight">{project.title}</h3>
+          <h3 className="text-[clamp(1.5rem,3vw,3.2rem)] font-medium leading-none tracking-tight">{project.title}</h3>
           <div className="justify-self-start sm:justify-self-end"><ProjectButton href={project.href} /></div>
         </div>
 
         <div className="grid grid-cols-[0.4fr_0.6fr] gap-3 sm:gap-4">
           <div className="grid gap-3 sm:gap-4">
-            <div className="h-[clamp(130px,16vw,220px)]"><ProjectVisual text={project.highlights[0]} /></div>
-            <div className="h-[clamp(160px,22vw,320px)]"><ProjectVisual text={project.highlights[1]} /></div>
+            <div className="h-[clamp(130px,16vw,230px)]"><ProjectVisual text={project.highlights[0]} /></div>
+            <div className="h-[clamp(160px,22vw,340px)]"><ProjectVisual text={project.highlights[1]} /></div>
           </div>
           <ProjectVisual text={project.highlights[2]} large />
         </div>
@@ -420,29 +386,35 @@ function ProjectCard({ project, index, total }: { project: Project; index: numbe
 
 function ProjectsSection() {
   return (
-    <section id="projects" className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 py-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:py-32">
-      <FadeIn>
-        <h2 className="hero-heading mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight sm:mb-20 md:mb-28">
-          开源项目
-        </h2>
-      </FadeIn>
-
-      <div className="mx-auto max-w-7xl pb-16">
+    <section id="projects" className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 pt-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:pt-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:pt-32">
+      <FadeIn><h2 className="hero-heading mb-16 text-center text-[clamp(3rem,12vw,160px)] font-black leading-none tracking-tight sm:mb-20 md:mb-28">开源项目</h2></FadeIn>
+      <div className="mx-auto max-w-7xl">
         {projects.map((project, index) => (
           <ProjectCard key={project.repo} project={project} index={index} total={projects.length} />
         ))}
       </div>
+      <div aria-hidden="true" className="h-[42vh] sm:h-[50vh]" />
+    </section>
+  )
+}
 
-      <FadeIn y={20} className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-6 border-t border-white/10 pt-12 text-[#D7E2EA]">
-        <p className="max-w-xl text-base font-light leading-relaxed text-[#8997A3]">
-          代码之外，我也持续整理 Go 设计模式和工程文章，把踩过的坑、做过的取舍和重新想明白的问题写下来。
-        </p>
-        <div className="flex gap-3">
-          <a href="/design-patterns/" className="rounded-full border border-white/20 px-6 py-3 text-sm tracking-[0.12em] transition hover:bg-white/10">设计模式</a>
-          <a href="/blog/" className="rounded-full border border-white/20 px-6 py-3 text-sm tracking-[0.12em] transition hover:bg-white/10">工程文章</a>
+function SiteFooter() {
+  return (
+    <footer className="relative z-30 bg-[#0C0C0C] px-5 pb-12 pt-10 text-[#D7E2EA] sm:px-8 md:px-10">
+      <FadeIn y={18} className="mx-auto flex max-w-7xl flex-col gap-8 border-t border-white/10 pt-10 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-xs tracking-[0.22em] text-[#66727D]">MOUXIAOJUN / OPEN SOURCE</p>
+          <p className="mt-5 max-w-xl text-base font-light leading-relaxed text-[#8997A3]">
+            代码之外，我也持续整理 Go 设计模式和工程文章，把踩过的坑、做过的取舍和重新想明白的问题写下来。
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <a href="/design-patterns/" className="rounded-full border border-white/20 px-6 py-3 text-sm tracking-[0.15em] transition hover:bg-white/10">设计模式</a>
+          <a href="/blog/" className="rounded-full border border-white/20 px-6 py-3 text-sm tracking-[0.15em] transition hover:bg-white/10">工程文章</a>
+          <a href="https://github.com/MouXiaoJun" target="_blank" rel="noreferrer" className="rounded-full border border-white/20 px-6 py-3 text-sm tracking-[0.15em] transition hover:bg-white/10">GitHub</a>
         </div>
       </FadeIn>
-    </section>
+    </footer>
   )
 }
 
@@ -454,6 +426,7 @@ export default function App() {
       <AboutSection />
       <ServicesSection />
       <ProjectsSection />
+      <SiteFooter />
     </main>
   )
 }
