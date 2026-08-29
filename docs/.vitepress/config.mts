@@ -4,17 +4,40 @@ export default defineConfig({
   lang: 'zh-CN',
   title: '邓晖 · Go Backend & AI Platform',
   description: 'Go 后端、AI 平台与开源工程：分布式系统、架构工具、API 正确性与工程实践。',
-  appearance: true,
+  appearance: 'dark',
+  cleanUrls: true,
+  sitemap: { hostname: 'https://mouxiaojun.github.io' },
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['link', { rel: 'canonical', href: 'https://mouxiaojun.github.io/' }],
+    ['meta', { name: 'theme-color', content: '#0C0C0C' }],
+    ['meta', { property: 'og:site_name', content: '邓晖 · Go Backend & AI Platform' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:image', content: 'https://mouxiaojun.github.io/og-card.svg' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+  ],
 
   themeConfig: {
     nav: [
       { text: '首页', link: '/' },
-      { text: '项目', link: '/#projects' },
+      { text: '开源项目', link: '/projects/' },
       { text: '设计模式', link: '/design-patterns/' },
-      { text: '博客', link: '/blog/' },
+      { text: '工程文章', link: '/blog/' },
       { text: '关于我', link: '/about/' },
     ],
     sidebar: {
+      '/projects/': [
+        {
+          text: '开源项目',
+          collapsed: false,
+          items: [
+            { text: '项目总览', link: '/projects/' },
+            { text: 'distsync · 分布式同步', link: '/projects/distsync/' },
+            { text: 'gomodulith · 架构治理', link: '/projects/gomodulith/' },
+            { text: 'specriot · API Fuzzing', link: '/projects/specriot/' },
+          ],
+        },
+      ],
       '/design-patterns/': [
         {
           text: '创建型',
@@ -85,9 +108,27 @@ export default defineConfig({
         },
       ],
     },
+    search: {
+      provider: 'local',
+    },
+    outline: {
+      level: [2, 3],
+      label: '本页内容',
+    },
+    docFooter: {
+      prev: '上一篇',
+      next: '下一篇',
+    },
+    sidebarMenuLabel: '目录',
+    returnToTopLabel: '返回顶部',
+    darkModeSwitchLabel: '主题',
+    lightModeSwitchTitle: '切换为浅色主题',
+    darkModeSwitchTitle: '切换为深色主题',
+    skipToContentLabel: '跳转到正文',
     socialLinks: [{ icon: 'github', link: 'https://github.com/MouXiaoJun' }],
     footer: {
-      message: 'Go Backend · AI Platform · Open Source',
+      message: 'Go Backend · Distributed Systems · AI Platform · Open Source',
+      copyright: 'Copyright © 2026 邓晖',
     },
   },
 })
