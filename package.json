@@ -8,7 +8,7 @@
     "dev": "vite --config portfolio/vite.config.ts",
     "typecheck": "tsc -p portfolio/tsconfig.json --noEmit",
     "build:home": "vite build --config portfolio/vite.config.ts",
-    "build:content": "node scripts/build-content.mjs",
+    "build:content": "node scripts/build-content.mjs && node scripts/apply-wide-layout.mjs",
     "build": "npm run build:home && npm run build:content",
     "check": "npm run typecheck && npm run build",
     "preview": "vite preview --config portfolio/vite.config.ts"

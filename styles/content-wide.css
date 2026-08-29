@@ -1,0 +1,94 @@
+/* Wide viewport layout overrides for content pages.
+   Keep prose readable, but let indexes, code, tables and diagrams use the screen. */
+
+.site-layout.has-outline {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.site-layout:not(.has-sidebar) .site-sidebar {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .site-nav-inner,
+  .site-footer {
+    width: 100%;
+    max-width: none;
+  }
+
+  .site-layout {
+    width: 100%;
+    max-width: none;
+    padding: 48px clamp(28px, 3vw, 72px) 96px;
+  }
+
+  .site-layout.has-sidebar,
+  .site-layout.has-sidebar.has-outline {
+    grid-template-columns: 210px minmax(0, 1fr);
+    column-gap: clamp(28px, 2.5vw, 52px);
+  }
+
+  .site-layout.has-sidebar .site-sidebar {
+    display: block;
+    padding-right: 18px;
+  }
+
+  .site-layout.is-index .content-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-layout.has-sidebar.has-outline {
+    grid-template-columns: 210px minmax(0, 1fr) 200px;
+    column-gap: clamp(32px, 2.5vw, 60px);
+  }
+
+  .site-layout.has-outline:not(.has-sidebar) {
+    grid-template-columns: minmax(0, 1fr) 200px;
+    column-gap: clamp(32px, 2.5vw, 60px);
+  }
+
+  .site-outline {
+    display: block;
+    max-width: 200px;
+    padding-left: 0;
+  }
+
+  .site-layout:not(.is-index) .doc-content > p,
+  .site-layout:not(.is-index) .doc-content > ul,
+  .site-layout:not(.is-index) .doc-content > ol,
+  .site-layout:not(.is-index) .doc-content > blockquote {
+    max-width: 980px;
+  }
+
+  .site-layout:not(.is-index) .doc-content > h2,
+  .site-layout:not(.is-index) .doc-content > h3,
+  .site-layout:not(.is-index) .doc-content > h4 {
+    max-width: 1080px;
+  }
+}
+
+@media (min-width: 1900px) {
+  .site-layout {
+    padding-right: clamp(64px, 4vw, 112px);
+    padding-left: clamp(64px, 4vw, 112px);
+  }
+
+  .site-layout.has-sidebar,
+  .site-layout.has-sidebar.has-outline {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .site-layout.has-sidebar.has-outline {
+    grid-template-columns: 220px minmax(0, 1fr) 210px;
+  }
+
+  .site-layout.is-index .content-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .site-layout.is-index .doc-hero-description {
+    max-width: 900px;
+  }
+}
