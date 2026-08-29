@@ -4,7 +4,7 @@ export default defineConfig({
   lang: 'zh-CN',
   title: '邓晖 · Go Backend & AI Platform',
   description: 'Go 后端、AI 平台与开源工程：分布式系统、架构工具、API 正确性与工程实践。',
-  appearance: 'dark',
+  appearance: true,
 
   themeConfig: {
     nav: [
